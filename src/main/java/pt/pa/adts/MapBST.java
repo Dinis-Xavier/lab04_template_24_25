@@ -120,8 +120,19 @@ public class MapBST<K extends Comparable<K>, V> implements Map<K,V> {
     }
 
     private BSTNode getLeftmostNode(BSTNode treeRoot) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+    if (treeRoot == null) {
+        throw new IllegalArgumentException("Tree root cannot be null.");
     }
+
+    BSTNode current = treeRoot;
+
+    while (current.left != null) {
+        current = current.left; // Continua indo para a esquerda até não haver mais filhos à esquerda
+    }
+
+    return current; // Retorna o nó mais à esquerda
+}
+
 
     @Override
     public boolean containsKey(K key) throws NullPointerException {
@@ -131,7 +142,17 @@ public class MapBST<K extends Comparable<K>, V> implements Map<K,V> {
     }
 
     private BSTNode searchNodeWithKey(K key, BSTNode treeRoot) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+
+        int comparison = key.compareTo(treeRoot.key);
+
+        if(comparison == 0){
+            reuturn treeRoot;
+        } else if(comparison > 0){
+           return searchNodeWithKey(key, treeRoot.right);
+        }
+        return searchNodeWithKey(key, treeRoot.left);
+
+        return node;
     }
 
     @Override
